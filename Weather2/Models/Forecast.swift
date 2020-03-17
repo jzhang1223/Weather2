@@ -13,7 +13,8 @@ public struct Forecast: Identifiable {
 //    public var id: ObjectIdentifier
     public let id = UUID()
     
-    var icon: Image
+//    var icon: Image
+    var icon: String
     var dayOfWeek: String
     var description: String
 }

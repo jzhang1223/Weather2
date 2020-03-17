@@ -9,14 +9,16 @@
 import Foundation
 import SwiftyJSON
 import Alamofire
+//import CityData
 
 let api_key = "12fde60cfd5214c003ac48e921696d71"
 let endpoint = "https://api.openweathermap.org"
 let cityJSON = "city.list"
 
 class WeatherData: ObservableObject {
-    @Published var currentCityData: JSON?
+    @Published var currentCityData: [CityData] = []
     @Published var currentCity: String?
+//    @Published var forecasts: [Forecast]?
     
     public func getWeatherFor(_ city: String) {
         // first check if it's stored already
@@ -54,21 +56,21 @@ class WeatherData: ObservableObject {
     
     public func fetchWeatherFor(cityID: String) {
         // Moscow
-        let exampleCall = "\(endpoint)/data/2.5/forecast?id=524901&APPID=\(api_key)"
-        let url = "https://api.openweathermap.org/data/2.5/forecast?id=\(cityID)&APPID=\(api_key)"
+//        let exampleCall = "\(endpoint)/data/2.5/forecast?id=524901&APPID=\(api_key)"
+        let url = "\(endpoint)/data/2.5/forecast?id=\(cityID)&APPID=\(api_key)"
         
         print("FETCH WEATHER FOR \(cityID)")
         
         // set to url when done
-        AF.request(exampleCall, method: .get).responseJSON { response in
+        AF.request(url, method: .get).responseJSON { response in
             switch response.result {
             case .success(let value):
                 let json = JSON(value)
-                self.currentCityData = json["list"]
+//                self.currentCityData = [CityData(json["list"].arrayValue)]
+                self.setCityDataWith(json: json["list"].arrayValue)
                 self.currentCity = json["city"]["name"].stringValue
                 print("JSON: \(self.currentCityData)")
-                //                print("JSON: \(json["list"])")
-            //                return json["list"]
+                print("City: \(self.currentCity)")
             case .failure(let error):
                 print(error)
                 //                return []
@@ -83,14 +85,57 @@ class WeatherData: ObservableObject {
     //        //get the image
     //    }
     
-    private func getIdFor(_ cityName: String, json cityData: JSON) -> String {
+    private func getIdFor(_ cityName: String, json cityData: JSON) -> String? {
         for city in cityData.arrayValue {
             if city["name"].string == cityName {
                 return city["id"].stringValue
             }
         }
-        return "End of filter search"
+        return nil
+    }
+    
+    private func setCityDataWith(json forecasts: [JSON]) {
+        for forecast in forecasts {
+            self.currentCityData.append(CityData(forecast))
+        }
     }
     
 }
 
+struct CityData: Identifiable {
+    public let id = UUID()
+    let dt: Int
+    let weather: Weather
+    
+    public init(_ json: JSON) {
+        self.dt = json["dt"].intValue
+        self.weather = Weather(json["weather"].arrayValue)
+    }
+    
+    public func getDT() -> Int {
+        return self.dt
+    }
+    
+    public func getWeatherDescription() -> String {
+        return self.weather.description
+    }
+    
+    public func getIcon() -> String {
+        return self.weather.icon
+    }
+}
+
+struct Weather: Decodable {
+    let description: String
+    let icon: String
+    
+    public init(_ weatherList: [JSON]) {
+        if !weatherList.isEmpty {
+            self.description = weatherList[0]["description"].stringValue
+            self.icon = weatherList[0]["icon"].stringValue
+        } else {
+            self.description = "No description"
+            self.icon = "No icon name"
+        }
+    }
+}

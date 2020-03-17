@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:../CityData.swift">
+   </FileRef>
+   <FileRef
       location = "group:/Users/Guest/Documents/Weather2/Weather2/Models/city.list.json">
    </FileRef>
    <FileRef

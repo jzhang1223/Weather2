@@ -19,6 +19,9 @@ struct SearchView: View {
             Button(action: search) {
                 Text("Search")
             }
+            .onTapGesture {
+                
+            }
         }
         .padding(.all)
         .border(Color.black)
@@ -26,8 +29,13 @@ struct SearchView: View {
     
     private func search() {
         print(data.getWeatherFor(text))
-        print(data.currentCity)
-        print(data.currentCityData)
+        dismissKeyboard()
+    }
+}
+
+private extension View {
+    func dismissKeyboard() {
+        UIApplication.shared.windows.first{ $0.isKeyWindow }?.endEditing(true)
     }
 }
 

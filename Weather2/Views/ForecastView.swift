@@ -10,18 +10,19 @@ import SwiftUI
 
 struct ForecastView: View {
     
-    @State var forecast: Forecast
+    @State var forecast: CityData
     
     var body: some View {
         VStack {
             HStack {
 //                Image(systemName: "circle")
-                forecast.icon
+//                forecast.icon
+                Text(forecast.getIcon())
 //                Text("Title")
-                Text(forecast.dayOfWeek)
+                Text("\(forecast.getDT())")
             }
 //            Text("Description long long long long long long long long long long long long long long long long long")
-            Text(forecast.description)
+            Text(forecast.getWeatherDescription())
             
         }
     }

@@ -10,17 +10,19 @@ import SwiftUI
 
 struct ForecastListView: View {
     
-    @State var forecasts: [Forecast]
+//    @State var forecasts: [Forecast]
+    @EnvironmentObject var data: WeatherData
     
     var body: some View {
-//        List {
-//            ForecastView()
-//            ForecastView()
-//        }
         List {
-            ForEach(forecasts) { forecast in
-                ForecastView(forecast: forecast)
-                
+//            ForEach(data.currentCityData) { cityData in
+//                ForecastView(forecast: Forecast(icon: cityData.getIcon(),
+//                                                dayOfWeek: cityData.getDT(),
+//                                                description: cityData.getWeatherDescription()))
+//            }
+            
+            ForEach(data.currentCityData) { cityData in
+                ForecastView(forecast: cityData)
             }
         }
 
