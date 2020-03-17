@@ -12,16 +12,21 @@ let samples: [Forecast] = [Forecast(icon: Image(systemName: "circle"), dayOfWeek
 
 struct HomeView: View {
     
+    @EnvironmentObject var data: WeatherData
+    
     var body: some View {
-        VStack {
-            SearchView()
-            ForecastListView(forecasts: samples)
+        NavigationView {
+            VStack {
+                SearchView()
+                ForecastListView(forecasts: [])
+            }
+            .navigationBarTitle(data.currentCity == nil ? "Weather" : "Weather for \(data.currentCity!)")
         }
     }
 }
 
-//struct HomeView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        HomeView()
-//    }
-//}
+struct HomeView_Previews: PreviewProvider {
+    static var previews: some View {
+        HomeView()
+    }
+}
