@@ -7,21 +7,18 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct ForecastView: View {
     
     @State var forecast: CityData
     
     var body: some View {
-        VStack {
+        VStack (alignment: .leading) {
             HStack {
-//                Image(systemName: "circle")
-//                forecast.icon
-                Text(forecast.getIcon())
-//                Text("Title")
-                Text("\(forecast.getDT())")
+                WebImage(url: URL(string: "https://openweathermap.org/img/wn/\(forecast.getIcon())@2x.png"))
+                Text("\(forecast.getDayOfWeek())")
             }
-//            Text("Description long long long long long long long long long long long long long long long long long")
             Text(forecast.getWeatherDescription())
             
         }

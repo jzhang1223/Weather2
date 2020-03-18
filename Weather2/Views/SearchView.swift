@@ -13,18 +13,19 @@ struct SearchView: View {
     @EnvironmentObject var data: WeatherData
     
     var body: some View {
-        HStack {
-            Image(systemName: "magnifyingglass")
-            TextField("Search city here", text: $text)
-            Button(action: search) {
-                Text("Search")
+        VStack {
+            Rectangle().frame(height: 1)
+            HStack (alignment: .center) {
+                Image(systemName: "magnifyingglass")
+                TextField("Search city here", text: $text)
+                Button(action: search) {
+                    Text("Search")
+                }
             }
-            .onTapGesture {
-                
-            }
+            .padding(.leading)
+            .padding(.trailing)
+            Rectangle().frame(height: 1)
         }
-        .padding(.all)
-        .border(Color.black)
     }
     
     private func search() {
@@ -38,7 +39,6 @@ private extension View {
         UIApplication.shared.windows.first{ $0.isKeyWindow }?.endEditing(true)
     }
 }
-
 
 
 struct SearchView_Previews: PreviewProvider {
