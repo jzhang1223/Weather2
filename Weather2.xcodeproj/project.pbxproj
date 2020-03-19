@@ -103,7 +103,7 @@
 				ACCE0F9F24207B40003F9B60 /* LaunchScreen.storyboard */,
 				ACCE0FA224207B40003F9B60 /* Info.plist */,
 				ACCE0F9C24207B40003F9B60 /* Preview Content */,
-				ACCE0FBF2420866C003F9B60 /* Models */,
+				ACCE0FBF2420866C003F9B60 /* Data */,
 				ACCE0FBE24208611003F9B60 /* Views */,
 			);
 			path = Weather2;
@@ -137,14 +137,14 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		ACCE0FBF2420866C003F9B60 /* Models */ = {
+		ACCE0FBF2420866C003F9B60 /* Data */ = {
 			isa = PBXGroup;
 			children = (
 				ACCE0FC024208686003F9B60 /* Forecast.swift */,
 				ACCE0FC82420925C003F9B60 /* WeatherData.swift */,
 				ACCE0FCC24209A35003F9B60 /* city.list.json */,
 			);
-			path = Models;
+			path = Data;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
