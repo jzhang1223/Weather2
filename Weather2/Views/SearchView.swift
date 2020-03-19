@@ -9,8 +9,9 @@
 import SwiftUI
 
 struct SearchView: View {
-    @State var text: String = ""
     @EnvironmentObject var data: WeatherData
+    @State private var text: String = ""
+    @State private var showError: Bool = false
     
     var body: some View {
         VStack {
@@ -21,6 +22,9 @@ struct SearchView: View {
                 Button(action: search) {
                     Text("Search")
                 }
+                .alert(isPresented: $showError) {
+                    Alert(title: Text("Invalid City"), message: Text("No city named \(text). Please search again."), dismissButton: .default(Text("Ok")))
+                }
             }
             .padding(.leading)
             .padding(.trailing)
@@ -29,8 +33,8 @@ struct SearchView: View {
     }
     
     private func search() {
-        print(data.getWeatherFor(text))
         dismissKeyboard()
+        showError = !data.getWeatherFor(text)
     }
 }
 

@@ -9,7 +9,6 @@
 import Foundation
 import SwiftyJSON
 import Alamofire
-//import CityData
 
 let api_key = "12fde60cfd5214c003ac48e921696d71"
 let data_endpoint = "https://api.openweathermap.org"
