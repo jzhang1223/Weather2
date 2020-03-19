@@ -18,19 +18,22 @@ let cityJSON = "city.list"
 class WeatherData: ObservableObject {
     @Published var currentCityData: [CityData] = []
     @Published var currentCity: String?
-    @Published var showError: Bool = false
     // cityName -> cityID
     private var pastIds: [String: String] = [:]
     
-    public func getWeatherFor(_ city: String) {
+    // Returns true for a valid city name
+    public func getWeatherFor(_ city: String) -> Bool {
         // check the json file for the city id of the name of the city
+        
         if let cityID = getIdFor(city) {
             currentCity = city
+            pastIds[city] = cityID
             fetchWeatherFor(cityID: cityID)
+            return true
         } else {
             // no id was found
             print("getWeatherFor: NO CITY ID FOUND")
-            showError = !showError
+            return false
         }
     }
     
@@ -45,7 +48,7 @@ class WeatherData: ObservableObject {
             do {
                 let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .alwaysMapped)
                 let jsonObj = try JSON(data: data)
-                return getIdFor(city, json: jsonObj)
+                return getIdFor(city, FromJSON: jsonObj)
             } catch let error {
                 print("parse error: \(error.localizedDescription)")
             }
@@ -55,28 +58,31 @@ class WeatherData: ObservableObject {
         return nil
     }
     
-    private func fetchWeatherFor(cityID: String) {
+    public func fetchWeatherFor(cityID: String) {
         
         let url = "\(data_endpoint)/data/2.5/forecast?id=\(cityID)&APPID=\(api_key)"
         
         print("FETCH WEATHER FOR \(cityID)")
-        
-        AF.request(url, method: .get).responseJSON { response in
-            switch response.result {
-            case .success(let value):
-                let json = JSON(value)
-                self.setDataWith(json: json)
-                print("JSON: \(self.currentCityData)")
-                print("City: \(self.currentCity)")
-            case .failure(let error):
-                print(error)
+        let dispatchQueue = DispatchQueue(label: "QueueIdentification", qos: .background)
+        dispatchQueue.async{
+            AF.request(url, method: .get).responseJSON { response in
+                switch response.result {
+                case .success(let value):
+                    let json = JSON(value)
+                    self.setDataWith(json: json)
+                    print("JSON: \(self.currentCityData)")
+                    print("City: \(self.currentCity)")
+                    print(self.pastIds)
+                case .failure(let error):
+                    print(error)
+                }
+                
             }
-            
         }
         
     }
     
-    private func getIdFor(_ cityName: String, json cityData: JSON) -> String? {
+    private func getIdFor(_ cityName: String, FromJSON cityData: JSON) -> String? {
         for city in cityData.arrayValue {
             if city["name"].string == cityName {
                 return city["id"].stringValue
