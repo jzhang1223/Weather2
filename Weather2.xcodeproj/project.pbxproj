@@ -52,7 +52,7 @@
 		ACCE0FBC24207EC7003F9B60 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		ACCE0FC024208686003F9B60 /* Forecast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Forecast.swift; sourceTree = "<group>"; };
 		ACCE0FC82420925C003F9B60 /* WeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherData.swift; sourceTree = "<group>"; };
-		ACCE0FCC24209A35003F9B60 /* city.list.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = city.list.json; path = /Users/Guest/Documents/Weather2/Weather2/Models/city.list.json; sourceTree = "<absolute>"; };
+		ACCE0FCC24209A35003F9B60 /* city.list.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = city.list.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
