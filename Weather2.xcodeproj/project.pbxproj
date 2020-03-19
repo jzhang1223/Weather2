@@ -22,7 +22,6 @@
 		ACCE0FC724208CDA003F9B60 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = ACCE0FC624208CDA003F9B60 /* Alamofire */; };
 		ACCE0FC92420925C003F9B60 /* WeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACCE0FC82420925C003F9B60 /* WeatherData.swift */; };
 		ACCE0FCD24209AE8003F9B60 /* city.list.json in Resources */ = {isa = PBXBuildFile; fileRef = ACCE0FCC24209A35003F9B60 /* city.list.json */; };
-		ACCE0FD924214658003F9B60 /* CityData.swift in Resources */ = {isa = PBXBuildFile; fileRef = ACCE0FCE24214069003F9B60 /* CityData.swift */; };
 		ACCE0FE024217A42003F9B60 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = ACCE0FDF24217A42003F9B60 /* SDWebImageSwiftUI */; };
 /* End PBXBuildFile section */
 
@@ -54,7 +53,6 @@
 		ACCE0FC024208686003F9B60 /* Forecast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Forecast.swift; sourceTree = "<group>"; };
 		ACCE0FC82420925C003F9B60 /* WeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherData.swift; sourceTree = "<group>"; };
 		ACCE0FCC24209A35003F9B60 /* city.list.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = city.list.json; path = /Users/Guest/Documents/Weather2/Weather2/Models/city.list.json; sourceTree = "<absolute>"; };
-		ACCE0FCE24214069003F9B60 /* CityData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,7 +140,6 @@
 		ACCE0FBF2420866C003F9B60 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				ACCE0FCE24214069003F9B60 /* CityData.swift */,
 				ACCE0FC024208686003F9B60 /* Forecast.swift */,
 				ACCE0FC82420925C003F9B60 /* WeatherData.swift */,
 				ACCE0FCC24209A35003F9B60 /* city.list.json */,
@@ -241,7 +238,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ACCE0FD924214658003F9B60 /* CityData.swift in Resources */,
 				ACCE0FCD24209AE8003F9B60 /* city.list.json in Resources */,
 				ACCE0FA124207B40003F9B60 /* LaunchScreen.storyboard in Resources */,
 				ACCE0F9E24207B40003F9B60 /* Preview Assets.xcassets in Resources */,

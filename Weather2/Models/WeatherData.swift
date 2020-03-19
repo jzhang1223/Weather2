@@ -40,7 +40,7 @@ class WeatherData: ObservableObject {
         print("GET ID FOR \"\(city)\"")
         
         if let value = pastIds[city] {
-            return pastIds[value]
+            return value
         }
         
         if let path = Bundle.main.path(forResource: cityJSON, ofType: "json") {
@@ -98,8 +98,14 @@ class WeatherData: ObservableObject {
     
     private func setCityDataWith(json forecasts: [JSON]) {
         self.currentCityData = []
+        var daysOfWeek: Set<String> = []
         for forecast in forecasts {
-            self.currentCityData.append(CityData(forecast))
+            // Since unspecified, I chose to just take the first timestamp of each date
+            let cityData = CityData(forecast)
+            let dayOfWeek = cityData.getDayOfWeek()
+            if daysOfWeek.count < 5 && daysOfWeek.insert(dayOfWeek).inserted {
+                self.currentCityData.append(cityData)
+            }
         }
     }
     
